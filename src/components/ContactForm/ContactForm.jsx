@@ -1,9 +1,8 @@
-import { Formik} from 'formik';
+import PropTypes from 'prop-types';
+import { Formik } from 'formik';
 import {AddForm, AddField, InputLabel, SubmitButton} from './ContactForm.styled'
 
 export const ContactForm = ({ onAddContact }) => {
-    
-
     const initialValues = {
         name: '',
         number: '',
@@ -26,4 +25,8 @@ export const ContactForm = ({ onAddContact }) => {
             </AddForm>
         </Formik>
     );
-};
+}
+
+ContactForm.propTypes = {
+    onAddContact: PropTypes.func.isRequired,
+}

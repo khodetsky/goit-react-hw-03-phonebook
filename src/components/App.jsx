@@ -26,6 +26,20 @@ export class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    if (localStorage.getItem('contacts')) {
+      const storageContacts = JSON.parse(localStorage.getItem('contacts'));
+    this.setState({contacts: storageContacts})
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.contacts.length !== prevState.contacts.length) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+      }
+    }
+
   addContact = (values, { resetForm }) => {
     if (this.state.contacts.find(contact => contact.name === values.name)) {
       alert(`${values.name} is already in contacts`)
@@ -62,10 +76,8 @@ export class App extends Component {
       contacts: prevState.contacts.filter(contact => contact.id !== contactId)
     }))
   }
-  
 
   render() {
-
     return (
       <>
         <PageHeader>Phonebook</PageHeader>
